@@ -1,1 +1,1 @@
-sudo python /home/pi/client.p 192.168.42.1 5000
+sudo python /home/pi/client.py 192.168.42.1 5000
