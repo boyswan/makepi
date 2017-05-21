@@ -6,7 +6,7 @@ fi
 echo $1 > /home/pi/pi_name
 
 cp wpa_supplicant.conf /etc/wpa_supplicant
-
+cp interfaces /etc/network/interfaces
 cp rc.local /etc/rc.local
 
 cp pigpiod /etc/init.d
