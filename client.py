@@ -27,6 +27,7 @@ def pattern():
 
 def sendSequence(message):
     if message == NAME:
+        print(message)
         pattern()
 
 
