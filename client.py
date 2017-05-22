@@ -19,16 +19,16 @@ Port = int(sys.argv[2])
 server.connect((IP_address, Port))
 
 
+def pattern():
+    pigpio(81, 23, 52)
+    time.sleep(1)
+    pigpio(0, 0, 0)
+
+
 def sendSequence(message):
-    data = json.loads(message)
-    name = data[0]
-    pattern = data[1]
-    if name == NAME:
-        for light in pattern:
-            [r, g, b] = light[0]
-            delay = light[1]
-            pigpio(r, g, b)
-            time.sleep(delay)
+    if message == NAME:
+        pattern()
+
 
 while True:
     sockets_list = [sys.stdin, server]
