@@ -2,13 +2,15 @@
 import socket
 import select
 import time
-import json
 import pigpio
 import sys
 
 file = open("pi_name", "r")
 pi_name = file.readline(1)
 NAME = "PI_" + pi_name
+RED_PIN = 17
+GREEN_PIN = 22
+BLUE_PIN = 24
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 if len(sys.argv) != 3:
@@ -18,11 +20,28 @@ IP_address = str(sys.argv[1])
 Port = int(sys.argv[2])
 server.connect((IP_address, Port))
 
+pi = pigpio.pi()
+bright = 255
+r = 255.0
+g = 0.0
+b = 0.0
+
+
+def setLights(pin, brightness):
+    realBrightness = int(int(brightness) * (float(bright) / 255.0))
+    pi.set_PWM_dutycycle(pin, realBrightness)
+
+
+def setLed(r, g, b):
+    setLights(RED_PIN, r)
+    setLights(GREEN_PIN, g)
+    setLights(BLUE_PIN, b)
+
 
 def pattern():
-    pigpio(81, 23, 52)
+    setLed(81, 23, 52)
     time.sleep(1)
-    pigpio(0, 0, 0)
+    setLed(0, 0, 0)
 
 
 def sendSequence(message):
