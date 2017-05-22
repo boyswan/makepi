@@ -1,6 +1,9 @@
 # Python program to implement client side of chat room.
 import socket
 import select
+import time
+import json
+import pigpiod
 import sys
 
 file = open("pi_name", "r")
@@ -17,13 +20,15 @@ server.connect((IP_address, Port))
 
 
 def sendSequence(message):
-    m = message.split("-")
-    name = m[0]
+    data = json.loads(message)
+    name = data[0]
+    pattern = data[1]
     if name == NAME:
-        seq = m[1].split(",")
-        print name
-        print seq
-
+        for light in pattern:
+            [r, g, b] = light[0]
+            delay = light[1]
+            pigpiod(r, g, b)
+            time.sleep(delay)
 
 while True:
     sockets_list = [sys.stdin, server]
@@ -32,6 +37,7 @@ while True:
     for socks in read_sockets:
         if socks == server:
             message = socks.recv(2048)
+            server.send(NAME + " received message")
             sendSequence(message)
 
 
