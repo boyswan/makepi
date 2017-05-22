@@ -3,7 +3,7 @@ import socket
 import select
 import time
 import json
-import pigpiod
+import pigpio
 import sys
 
 file = open("pi_name", "r")
@@ -27,7 +27,7 @@ def sendSequence(message):
         for light in pattern:
             [r, g, b] = light[0]
             delay = light[1]
-            pigpiod(r, g, b)
+            pigpio(r, g, b)
             time.sleep(delay)
 
 while True:
