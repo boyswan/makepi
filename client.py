@@ -32,23 +32,25 @@ def setLights(pin, brightness):
     pi.set_PWM_dutycycle(pin, realBrightness)
 
 
-def setLed(r, g, b):
-    setLights(RED_PIN, r)
-    setLights(GREEN_PIN, g)
-    setLights(BLUE_PIN, b)
-
-
-def pattern():
-    setLed(81, 23, 52)
-    time.sleep(1)
-    setLed(0, 0, 0)
+def setLed(newR, newG, newB):
+    setLights(RED_PIN, newR)
+    setLights(GREEN_PIN, newG)
+    setLights(BLUE_PIN, newB)
 
 
 def sendSequence(message):
     if message == NAME:
         print(message)
-        pattern()
+        setLed(81.0, 23.0, 52.0)
+        time.sleep(0.5)
+        setLed(22.0, 123.0, 83.0)
+        time.sleep(0.5)
+        setLed(0, 0, 0)
 
+
+setLed(255.0, 255.0, 255.0)
+time.sleep(0.2)
+setLed(0, 0, 0)
 
 while True:
     sockets_list = [sys.stdin, server]
