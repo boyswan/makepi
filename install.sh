@@ -12,6 +12,7 @@ cp rc.local /etc/rc.local
 cp pigpiod /etc/init.d
 chmod u+x /etc/init.d/pigpiod
 update-rc.d pigpiod defaults
+update-rc.d pigpiod enable
 
 cp client.py /home/pi
 chmod u+x /home/pi/client.py
