@@ -7,7 +7,7 @@ echo $1 > /home/pi/pi_name
 
 cp wpa_supplicant.conf /etc/wpa_supplicant
 cp interfaces /etc/network/interfaces
-cp rc.local /etc/rc.local
+# cp rc.local /etc/rc.local
 
 cp pigpiod /etc/init.d
 chmod u+x /etc/init.d/pigpiod
@@ -20,5 +20,8 @@ chmod u+x /home/pi/client.py
 
 cp client.sh /home/pi
 chmod u+x /home/pi/client.sh
+
+mkdir /home/pi/logs
+crontab /home/pi/makepi/crontab
 
 echo "added files!"

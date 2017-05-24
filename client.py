@@ -1,3 +1,4 @@
+#!/usr/bin/python
 # Python program to implement client side of chat room.
 import socket
 import select
@@ -5,27 +6,26 @@ import time
 import pigpio
 import sys
 
-file = open("pi_name", "r")
+if len(sys.argv) != 3:
+    print "Correct usage: script, IP address, port number"
+    exit()
+
+IP_address = str(sys.argv[1])
+Port = int(sys.argv[2])
+
+file = open("/home/pi/pi_name", "r")
 pi_name = file.readline(1)
+pi = pigpio.pi()
+
 NAME = "PI_" + pi_name
 RED_PIN = 17
 GREEN_PIN = 22
 BLUE_PIN = 24
 
-server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-if len(sys.argv) != 3:
-    print "Correct usage: script, IP address, port number"
-    exit()
-IP_address = str(sys.argv[1])
-Port = int(sys.argv[2])
-server.connect((IP_address, Port))
-
-pi = pigpio.pi()
 bright = 255
 r = 255.0
 g = 0.0
 b = 0.0
-
 
 def setLights(pin, brightness):
     realBrightness = int(int(brightness) * (float(bright) / 255.0))
@@ -51,6 +51,10 @@ def sendSequence(message):
 setLed(255.0, 255.0, 255.0)
 time.sleep(0.2)
 setLed(0, 0, 0)
+time.sleep(10)
+
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server.connect((IP_address, Port))
 
 while True:
     sockets_list = [sys.stdin, server]
