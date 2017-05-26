@@ -43,9 +43,12 @@ def setLed(newR, newG, newB):
 def sendSequence(message):
     m = message.split("-")
     name = m[0]
-    pat = m[1]
-    if name == NAME:
-        getPattern(pat, setLed)
+    # pat = m[1]
+    [red, green, blue] = m[1].split(",")
+    if (name == NAME or name == 'ALL'):
+        print(red, green, blue)
+        setLed(float(red), float(green), float(blue))
+        # getPattern(pat, setLed)
 
 
 setLed(255.0, 255.0, 255.0)
@@ -55,6 +58,11 @@ time.sleep(10)
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.connect((IP_address, Port))
+
+
+setLed(255.0, 0, 0)
+time.sleep(0.2)
+setLed(0, 0, 0)
 
 while True:
     sockets_list = [sys.stdin, server]
