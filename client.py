@@ -5,6 +5,7 @@ import select
 import time
 import pigpio
 import sys
+from patterns import getPattern
 
 if len(sys.argv) != 3:
     print "Correct usage: script, IP address, port number"
@@ -27,6 +28,7 @@ r = 255.0
 g = 0.0
 b = 0.0
 
+
 def setLights(pin, brightness):
     realBrightness = int(int(brightness) * (float(bright) / 255.0))
     pi.set_PWM_dutycycle(pin, realBrightness)
@@ -39,13 +41,11 @@ def setLed(newR, newG, newB):
 
 
 def sendSequence(message):
-    if message == NAME:
-        print(message)
-        setLed(81.0, 23.0, 52.0)
-        time.sleep(0.5)
-        setLed(22.0, 123.0, 83.0)
-        time.sleep(0.5)
-        setLed(0, 0, 0)
+    m = message.split("-")
+    name = m[0]
+    pat = m[1]
+    if name == NAME:
+        getPattern(pat, setLed)
 
 
 setLed(255.0, 255.0, 255.0)
