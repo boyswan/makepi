@@ -45,10 +45,10 @@ def getPattern(pattern, setLed):
     elif (pattern == 'PIN'):
         onPink(setLed)
     elif (pattern == 'RED'):
-        onPink(setLed)
+        onRed(setLed)
     elif (pattern == 'GRE'):
-        onPink(setLed)
+        onGreen(setLed)
     elif (pattern == 'PUR'):
-        onPink(setLed)
+        onPurple(setLed)
     elif (pattern == 'YEL'):
-        onPink(setLed)
+        onYellow(setLed)
