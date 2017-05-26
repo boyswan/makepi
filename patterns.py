@@ -65,4 +65,4 @@ def getPattern(pattern, setLed):
     elif (pattern == 'YEL'):
         onYellow(setLed)
     elif (pattern == 'BLU'):
-        onYellow(setLed)
+        onBlue(setLed)
