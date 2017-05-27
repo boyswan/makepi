@@ -43,15 +43,15 @@ def setLed(newR, newG, newB):
 def sendSequence(message):
     m = message.split("-")
     name = m[0]
-    # pat = m[1]
-    [red, green, blue] = m[1].split(",")
+    pat = m[1]
+    # [red, green, blue] = m[1].split(",")
     if (name == NAME or name == 'ALL'):
-        print(red, green, blue)
-        setLed(float(red), float(green), float(blue))
-        # getPattern(pat, setLed)
+        # print(red, gree, blue)
+        # setLed(float(red), float(green), float(blue))
+        getPattern(pat, setLed)
 
 
-setLed(255.0, 255.0, 255.0)
+setLed(255.0, 0, 255.0)
 time.sleep(0.2)
 setLed(0, 0, 0)
 time.sleep(10)
